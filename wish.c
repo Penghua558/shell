@@ -4,6 +4,7 @@
 #include <string.h>
 #include <errno.h>
 #include "checkexec.h"
+#include "shellmisc.h"
 
 int main(int argc, char* argv[]) {
     char error_message[30] = "An error has occurred\n";
@@ -25,31 +26,33 @@ int main(int argc, char* argv[]) {
                 }
                 line[nread-1] = '\0'; // nread-1 contains \b, clear it
 
-                char* usrline = (char*) malloc(1+sizeof(line));
+                char* usrline = (char*) malloc(2+strlen(line));
                 usrline[0] = c;
                 strcat(usrline,line);
                 free(line);
 
-                //extract command for usrline
+                //extract command from usrline
+                int* cmdnum = NULL;
+                int tmp = 0;
+                cmdnum = &tmp;
+                struct cmdent* cmdblk = extract(usrline, cmdnum);
+
                 char* cmd = (char*) malloc(sizeof(usrline));
                 strcpy(cmd,usrline);
 
 
                 // build in command: exit
-                if (!strcmp(cmd,"exit"))
+                if (!strcmp(cmdblk[0].args[0],"exit"))
                     exit(0);
                 
                 //check if command exists in directories and is executable
                 char* pathname = NULL;
-                if ((pathname = check(cmd)) == NULL) {
+                if ((pathname = check(cmdblk[0].args[0])) == NULL) {
                     write(STDERR_FILENO, error_message, strlen(error_message));
-                    free(cmd);
                     /* exit(1); */
                 } else {
-                    free(cmd);
-                    char* arg_list[] = {pathname, NULL};
-                    /* printf("main function: %s\n", pathname); */
-
+                    /* char* arg_list[] = {pathname, NULL}; */
+                    cmdblk[0].args[0] = pathname;
                     // execute shell command
                     int rc = fork(); // fork a new child process to execute shell command
                     if (rc < 0) {
@@ -57,7 +60,7 @@ int main(int argc, char* argv[]) {
                         exit(1);
                     } else if (rc == 0) {
                         // in child process, execute shell command
-                        if (execv(pathname, arg_list) == -1) {
+                        if (execv(pathname, cmdblk[0].args) == -1) {
                             write(STDERR_FILENO, error_message, strlen(error_message));
                             /* exit(1); */
                         }
@@ -66,6 +69,8 @@ int main(int argc, char* argv[]) {
                         waitpid(rc, NULL, 0);
                     }
                 }
+                // after finishing all commands, free memory of cmdblk
+                free(cmdblk);
             } else if (c == EOF) {
                 // if user input EOF, exit program gracefully
                 printf("\n");
