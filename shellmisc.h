@@ -6,6 +6,7 @@
 
 #define MAX_ARGNUM 20
 
+extern char error_message[30];
 struct cmdent {
     int argnum; // store number of arguments, -1 indicates no command
     char* args[MAX_ARGNUM]; // store command and arguments
