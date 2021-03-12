@@ -24,4 +24,4 @@ To change default path enviroment, use following syntax:
 executing this command should overwrite current path enviroment with new  paths 
 ``path1``,``path2``, ``path3`` and whatever paths you have passed on the command. If you
 only type a single command ``path`` without passing any argument, nothing will happen to 
-path enviroment, instead an error message will print to screen
+path enviroment, instead an error message will print to screen.
