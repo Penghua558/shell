@@ -25,3 +25,13 @@ executing this command should overwrite current path enviroment with new  paths
 ``path1``,``path2``, ``path3`` and whatever paths you have passed on the command. If you
 only type a single command ``path`` without passing any argument, nothing will happen to 
 path enviroment, instead an error message will print to screen.
+
+## How to install and use it?
+To install all you need to do is download executable program ``wish`` and drop it 
+anywhere you want.<br/>
+Or you can build it from source, download all files, then change directory to where 
+files exist, then type ``make`` command to build, you can also type ``make clean`` to
+remove all object files to clean up the directory, after build is complete, you should
+find an executable program called ``wish`` in current directory.<br/>
+To use the shell, type ``./wish`` in console to run the shell program, after that you
+should see a new prompt appears on the screen: ``wish>``. After that, you are off to go.
