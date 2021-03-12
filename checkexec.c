@@ -3,10 +3,8 @@
 #include <unistd.h>
 #include <string.h>
 #include "checkexec.h"
+#include "builtincmd.h"
 
-const char* path[PATH_NUM] = {"/bin",
-                                "/usr/bin",
-                                "/sbin"};
 
 char* check(char* cmd) {
     // check if cmd is accessible and executable

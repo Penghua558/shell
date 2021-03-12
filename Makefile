@@ -1,11 +1,11 @@
-TempOBJ = wish.o shellmisc.o paraexec.o checkexec.o
+TempOBJ = wish.o builtincmd.o shellmisc.o paraexec.o checkexec.o
 FinalOBJ = wish
 CC = gcc
 CFLAGS = -g
 
 $(FinalOBJ): $(TempOBJ)
 	$(CC) $(CFLAGS) $^ -o $@
-%.o: %.c
+$(objects):%.o: %.c
 	$(CC) -c $< -o $@
 
 .PHONY: clean
