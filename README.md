@@ -26,7 +26,7 @@ executing this command should overwrite current path enviroment with new  paths
 only type a single command ``path`` without passing any argument, nothing will happen to 
 path enviroment, instead an error message will print to screen.
 
-## How to install and use it?
+# How to install and use it?
 To install all you need to do is download executable program ``wish`` and drop it 
 anywhere you want.<br/>
 Or you can build it from source, download all files, then change directory to where 
