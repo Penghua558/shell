@@ -9,19 +9,13 @@
 #include "builtincmd.h"
 
 int main(int argc, char* argv[]) {
-    /* char error_message[30] = "An error has occurred\n"; */
-    /* char* path[PATH_MAXNUM] = {"/bin", "/sbin", "/usr/bin"}; */
-    /* char** path = malloc(sizeof(char*)*PATH_MAXNUM); */
-    /* path[0] = "/bin"; */
-    /* path[1] = "/sbin"; */
-    /* path[2] = "/usr/bin"; */
     if (argc == 1) {
         // interactive mode
         while (1) {
-            printf("PATH_NUM: %d\n", PATH_NUM);
-            for (int i=0; i<PATH_NUM; i++)
-                printf("%s ", path[i]);
-            printf("\n");
+            /* printf("PATH_NUM: %d\n", PATH_NUM); */
+            /* for (int i=0; i<PATH_NUM; i++) */
+            /*     printf("%s ", path[i]); */
+            /* printf("\n"); */
             char* line = NULL;
             size_t len = 0;
             ssize_t nread;
@@ -50,7 +44,7 @@ int main(int argc, char* argv[]) {
                 *cmdnum = 0;
                 struct cmdent* cmdblk = extract(usrline, cmdnum);
 
-                printf("line 47 path[0]: %s\n", path[0]);
+                /* printf("line 47 path[0]: %s\n", path[0]); */
                 /* printf("line 47 path[0]: %s\n", path); */
 
                 // build in command: exit
